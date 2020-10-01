@@ -70,7 +70,7 @@ Le d indique que c'est un répertoire, rwx indique que l'utilisateur peut lire �
 3. Modifier les droits par défaut (rw pour l'utilisateur, r pour le groupe, aucun droit pour le groupe)
 Commandes
 ```
-umask 037
+umask 026
 touch test.txt
 ls -l test.txt
 ```
@@ -83,7 +83,7 @@ Nous pouvons bien voir le fait que notre utilisateur a les droits de lectueur et
 4. Modifier les droits par défaut (aucun droits pour tout le monde)
 Commandes
 ```
-umask 777
+umask 666
 touch test.txt
 ls -l test.txt
 ```
@@ -96,3 +96,31 @@ Nous pouvons bien voir le fait qu'il y a aucune permission pour qui que ce soit
 5. Est-il possible de le supprimer ?
 
 Oui, il est possible de le supprimer
+
+## Question 4 : Droits et fichiers
+
+1. Editer les droits d'un fichier en root (r pour l'utilisateur, r pour le groupe, rien pour les autres)
+Commandes
+```
+touch test.txt
+chmod 440 test.txt
+ls -l test.txt
+```
+Résultat
+```
+-r--r----- 1 root root 0 oct.   1 15:11 test.txt
+```
+
+2. Écrire dans le fichier `/root/test.txt`
+
+Il est impossible de lire lire ou d'écriture dans le fichier `test.txt`
+
+3. Authorisé l'utilisateur `tchadelicard` à lire et écrire le fichier test.txt
+
+Commandes
+```
+chmod 446 test.txt
+ls -l test.txt
+```
+Résultat
+``````
