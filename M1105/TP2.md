@@ -236,6 +236,7 @@ Résultat
 Commande
 ```
 grep -i "boulanger[[:blank:]]lili" telephone.txt | cut -f 3```
+```
 
 Résultat
 ```
@@ -293,7 +294,7 @@ di lu ma me je ve sa
 30
 ```
 
-3. Afficher le calendrier de septembre 1752
+4. Afficher le calendrier de septembre 1752
 
 Commande
 ```
