@@ -312,4 +312,114 @@ di lu ma me je ve sa
 
 ## Question 8 : Configuration du bash
 
-1. 
+1. Ajouter des lignes dans le `.bashrc`
+
+```
+echo "Bonjour $USER"
+echo "Nous sommes le $(date)"
+echo "Bonne journée !"
+```
+
+2. Vérifier le bon fonctionnement
+
+```
+Bonjour  tchadelicard
+Nous sommes le  jeu. 01 oct. 2020 17:10:50 CEST
+Bonne journée !
+```
+
+3. Expliquer ce qu'est un alias
+
+Un alias permet de crée une commande qui pointe vers une autre commande.
+
+Exemple :
+
+Commande
+```
+alias chat cat
+```
+
+Résultat
+```
+$ chat telephone.txt                
+Boulez	Pierre	456-765
+Duruflé	Pierre	267-736
+Boulanger	Nadia	936-645
+Cochereau	Pierre	738-876
+Boulanger	Lili	936-074
+
+```
+
+La commande suivante crée un alias du nom de chat qui va executer la cat lorsqu'on l'utilise.
+
+## Question 9 : Recherche de fichier
+
+1. Chercher le fichier stdio.h de deux manières différentes
+
+Commande
+```
+find / -name stdio.h 2>/dev/null
+```
+
+Résultat
+```
+/snap/gnome-3-34-1804/36/usr/include/c++/6/tr1/stdio.h
+/snap/gnome-3-34-1804/36/usr/include/stdio.h
+/snap/gnome-3-34-1804/36/usr/include/x86_64-linux-gnu/bits/stdio.h
+/usr/include/stdio.h
+/usr/include/x86_64-linux-gnu/bits/stdio.h
+/usr/include/c++/9/tr1/stdio.h
+```
+
+Commande
+```
+du -a / 2>/dev/null | grep /stdio.h
+```
+
+Résultat
+```
+2	/snap/gnome-3-34-1804/36/usr/include/c++/6/tr1/stdio.h
+29	/snap/gnome-3-34-1804/36/usr/include/stdio.h
+6	/snap/gnome-3-34-1804/36/usr/include/x86_64-linux-gnu/bits/stdio.h
+32	/usr/include/stdio.h
+8	/usr/include/x86_64-linux-gnu/bits/stdio.h
+4	/usr/include/c++/9/tr1/stdio.h
+```
+
+On utilise `2>/dev/null` pour rediriger la sortie d'erreur dans `/dev/null`
+
+2. Créez un fichier `toto.txt` et le chercher
+
+Commande
+```
+find / -name toto.txt 2>/dev/null
+```
+
+Résultat
+```
+/home/tchadelicard/git/DUT-RT/M1105/toto.txt
+```
+
+Commande
+```
+du -a / 2>/dev/null | grep /toto.txt
+```
+
+Résultat
+```
+0	/home/tchadelicard/git/DUT-RT/M1105/toto.txt
+```
+
+La solution la plus adaptée me semble être `find`, la commande met moins de temps à effetuer la recherche du fichier. Je n'ai pas utilisé `locate` car le paquet n'est pas installé par défaut sur ma distribution. De plus, `locate` fait une indexation ce qui n'est pas bon pour un SSD.
+
+### Question 10 : Dénombrement 
+
+Commande
+```
+find / -user $USER -type f 2>/dev/null | wc -l
+```
+
+Résultat
+```
+302452
+```
