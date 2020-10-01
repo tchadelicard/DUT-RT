@@ -165,3 +165,150 @@ La commande redirige le résultat le résultat de la commande dans le fichier `r
 
 1. Afficher le carnet d'adresse tiré par ordre alphabétique
 
+Commande
+```
+sort -d telephone.txt
+```
+
+Résultat
+```
+Boulanger       Lili    936-074
+Boulanger       Nadia   936-645
+Boulez  Pierre  456-765
+Cochereau       Pierre  738-876
+Duruflé Pierre  267-736
+```
+
+2. Afficher le nombre de personnes dans le répertoire
+
+Commande
+```
+wc -l telephone.txt
+```
+
+Résultat
+```
+5 telephone.txt
+```
+
+3. Afficher toutes les lignes concernant les `Boulanger`
+
+Commande
+```
+grep Boulanger telephone.txt
+```
+
+Résultat
+```
+Boulanger       Nadia   936-645
+Boulanger       Lili    936-074
+```
+
+4. Afficher toutes les lignes ne concernant pas les `Boulanger`
+
+Commande
+```
+grep -v Boulanger telephone.txt
+```
+
+Résultat
+```
+Boulez  Pierre  456-765
+Duruflé Pierre  267-736
+Cochereau       Pierre  738-876
+```
+
+5. Afficher uniquement le numéro des `Boulanger`
+
+Commande
+```
+grep Boulanger telephone.txt | cut -f 3
+```
+
+Résultat
+```
+936-645
+936-074
+```
+
+6. Afficher uniquement le numéro de `Lili Boulanger` tout en étant insensible à la casse
+
+Commande
+```
+grep -i "boulanger[[:blank:]]lili" telephone.txt | cut -f 3```
+
+Résultat
+```
+936-074
+```
+
+### Question 7 : Date
+
+1. Afficher la date courante
+
+Commande
+```
+date
+```
+
+Résultat
+```
+jeu. 01 oct. 2020 16:52:26 CEST
+```
+
+2. Afficher le calendrier du mois courant
+
+Commande
+```
+cal
+```
+
+Résultat
+```
+    Octobre 2020
+di lu ma me je ve sa
+             1  2  3
+ 4  5  6  7  8  9 10
+11 12 13 14 15 16 17
+18 19 20 21 22 23 24
+25 26 27 28 29 30 31
+```
+
+3. Afficher le calendrier de septembre 1810
+
+Commande
+```
+cal september 1810
+```
+
+Résultat
+```
+   Septembre 1810
+di lu ma me je ve sa
+                   1
+ 2  3  4  5  6  7  8
+ 9 10 11 12 13 14 15
+16 17 18 19 20 21 22
+23 24 25 26 27 28 29
+30
+```
+
+3. Afficher le calendrier de septembre 1752
+
+Commande
+```
+cal september 1752
+```
+
+Résultat
+```
+   Septembre 1752
+di lu ma me je ve sa
+       1  2 14 15 16
+17 18 19 20 21 22 23
+24 25 26 27 28 29 30
+```
+
+## Question 8 : Configuration du bash
+
+1. 
