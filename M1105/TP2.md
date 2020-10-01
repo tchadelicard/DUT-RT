@@ -59,7 +59,7 @@ La commande umask 022 retire le droit d'écriture pour le group `tchadelicard` e
 Commandes
 ```
 mkdir test
-ls -l | grep test
+ls -dl test
 ```
 Résultat
 ```
@@ -123,4 +123,45 @@ chmod 446 test.txt
 ls -l test.txt
 ```
 Résultat
-``````
+```
+-r--r--rw- 1 root root 0 oct.   1 15:11 test.txt
+```
+Toujours impossible de lire le fichier `/root/test.txt` mais ceci est normal le fichier est dans le répertoire `/root` et le laisser passer n'est pas actif sur le répertoire. Si le fichier est placé ailleurs, cela fonctionne. 
+
+## Question 5 : Recherche dans un fichier
+
+1. `grep monsieur file.txt`
+
+Résultat
+```
+1- monsieur dupont
+2- monsieur durant
+```
+
+On obtient les résultats 1 et 2 car grep est sensible à la casse, c'est à dire qu'il prends en compte si c'est une majuscule ou une minuscule.
+
+2. `grep monsieur file.txt | wc -l`
+
+Résultat
+```
+2
+```
+On obtient bien deux lignes comme en haut, le résultat est cohérent avec la question 1.
+
+3. `grep -i monsieur file.txt | wc`
+
+Résultat
+```
+3 9 57
+```
+
+Il nous affiche qu'il y a 3 lignes ce qui est normal vu qu'on fait une recherche qui n'est pas sensible à la casse avec le terme `monsieur` donc il affiche toutes les lignes avec `monsieur` mais même celles écrites avec des majuscules. Il nous dit qu'il y a 9 mots car chaque lignes contient 3 mots donc 3 * 3 = 9, le chiffre au début de la ligne compte comme un mot. Pour finir 57 est la quantité de bytes et chaque caractère correspond à un byte donc nous avons 57 caractères
+
+4. `grep -i monsieur file.txt | wc > resultats.txt`
+
+La commande redirige le résultat le résultat de la commande dans le fichier `resultats.txt` la sortie standard est envoyé dans le fichier texte.
+
+## Question 6 : Carnet téléphonique
+
+1. Afficher le carnet d'adresse tiré par ordre alphabétique
+
