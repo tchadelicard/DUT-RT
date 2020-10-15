@@ -1,0 +1,207 @@
+#+TITLE: TP 4: Scripts
+#+AUTHOR: Tchadel Icard
+
+* Question 1: Arguments de la ligne de commande
+** Script qui imprime les trois premier arguments :
+*** 1.sh
+**** Script :
+#+BEGIN_EXAMPLE
+#!/bin/bash
+
+echo "Premier argument ${1}"
+echo "Second argument ${2}"
+echo "Troisième argument ${3}"
+
+exit 0
+#+END_EXAMPLE
+**** Résultat :
+./1.sh arg1 arg2 arg3
+#+BEGIN_EXAMPLE
+Premier argument arg1
+Second argument arg2
+Troisième argument arg3
+#+END_EXAMPLE
+** Script qui vérifie qu'il y a bien 3 arguments :
+*** 2.sh
+**** Script :
+#+BEGIN_EXAMPLE
+#!/bin/bash
+
+if [[ $# -eq 3 ]]; then
+    echo "Il y a bien 3 arguments !"
+    exit 0
+else
+   echo "Vous avez mis plus de 3 arguments !"
+   exit 1
+fi
+#+END_EXAMPLE
+**** Résultat :
+./2.sh arg1 arg2 arg3 arg4
+#+BEGIN_EXAMPLE
+Vous avez mis plus de 3 arguments !
+#+END_EXAMPLE
+* Question 2: Maximum
+** 1
+*** Script:
+#+BEGIN_EXAMPLE
+#!/bin/bash
+
+if [[ ${1} -gt ${2} ]]; then
+    echo ${1}
+else
+    echo ${2}
+fi
+
+exit 0
+#+END_EXAMPLE
+*** Résultat:
+./max.sh 5 2
+#+BEGIN_EXAMPLE
+5
+#+END_EXAMPLE
+
+./max.sh 2 5
+#+BEGIN_EXAMPLE
+5
+#+END_EXAMPLE
+** 2
+*** Script:
+#+BEGIN_EXAMPLE
+#!/bin/bash
+
+if [[ ${1} -gt ${2} && ${1} -gt ${3} ]]; then
+    echo ${1}
+elif [[ ${2} -gt ${1} && ${2} -gt ${3} ]]; then
+    echo ${2}
+else
+    echo ${3}
+fi
+
+exit 0
+#+END_EXAMPLE
+*** Résultat:
+./max2.sh 3 2 1
+#+BEGIN_EXAMPLE
+3
+#+END_EXAMPLE
+./max2.sh 1 2 3
+#+BEGIN_EXAMPLE
+3
+#+END_EXAMPLE
+./max2.sh 3 2 1
+#+BEGIN_EXAMPLE
+3
+#+END_EXAMPLE
+./max2.sh 2 3 1
+#+BEGIN_EXAMPLE
+3
+#+END_EXAMPLE
+* Question 3: Lisibilité
+** Script:
+#+BEGIN_EXAMPLE
+#!/bin/bash
+
+if [[ -e ${1} && -r ${1} ]]; then
+    echo "Le fichier existe bien et vous pouvez le lire !"
+    exit 0
+else
+    echo "Le fichier n'eiste pas ou vous ne pouvez pas le lire !"
+    exit 1
+fi
+#+END_EXAMPLE
+** Résultat:
+./est_lisible.sh ./test
+#+BEGIN_EXAMPLE
+Le fichier existe bien et vous pouvez le lire !
+#+END_EXAMPLE
+
+./est_lisible.sh ./toto
+#+BEGIN_EXAMPLE
+Le fichier n'eiste pas ou vous ne pouvez pas le lire !
+#+END_EXAMPLE
+
+* Question 4: Affichage massif
+**  Script:
+#+BEGIN_EXAMPLE
+#!/bin/bash
+
+for file in $@; do
+    if [[ -e ${file} && -r ${file} ]]; then
+        basename ${file}
+        cat ${file}
+        echo "\n"
+    else
+        echo -e "Inaccessible"
+    fi
+done
+
+exit 0
+#+END_EXAMPLE
+**  Résultat:
+./bigcat.sh ./1.sh ./2.sh ./est_lisible.sh ./max3.sh
+#+BEGIN_EXAMPLE
+1.sh
+#!/bin/bash
+
+echo "Premier argument ${1}"
+echo "Second argument ${2}"
+echo "Troisième argument ${3}"
+
+
+2.sh
+#!/bin/bash
+
+if [[ $# -eq 3 ]]; then
+    echo "Il y a bien 3 arguments !"
+    exit 0
+else
+   echo "Vous avez mis plus de 3 arguments !"
+   exit 1
+fi
+
+
+est_lisible.sh
+#!/bin/bash
+
+if [[ -e ${1} && -r ${1} ]]; then
+    echo "Le fichier existe bien et vous pouvez le lire !"
+    exit 0
+else
+    echo "Le fichier n'eiste pas ou vous ne pouvez pas le lire !"
+    exit 1
+fi
+
+
+Inaccessible
+#+END_EXAMPLE
+
+* Question 5: Gestion des types de fichiers
+** 1
+*** Script:
+#+BEGIN_EXAMPLE
+#!/bin/bash
+
+if [[ -d $1 ]]; then
+    echo "$(basename $1) est un dossier !"
+elif [[ -f $1 ]]; then
+    echo "$(basename $1) est un fichier !"
+else
+    echo "$(basename $1) est autre chose !"
+fi
+#+END_EXAMPLE
+*** Résultat:
+./existe.sh ../scripts/
+#+BEGIN_EXAMPLE
+scripts est un dossier !
+#+END_EXAMPLE
+./existe.sh 1.sh
+#+BEGIN_EXAMPLE
+1.sh est un fichier !
+#+END_EXAMPLE
+./existe.sh 10.sh
+#+BEGIN_EXAMPLE
+10.sh est autre chose !
+#+END_EXAMPLE
+10.sh donne autre chose car le fichier n'existe pas !
+** 2
+*** Script:
